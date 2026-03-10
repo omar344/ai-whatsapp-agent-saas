@@ -1,0 +1,53 @@
+# .NET build artifacts
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Rider
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/contentModel.xml
+.idea/**/projectSettingsUpdater.xml
+.idea/**/modules.xml
+.idea/**/.idea.*.iml
+.idea/**/sonarlint
+.idea/**/dataSources
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.local.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+.idea/**/httpRequests
+.idea/**/caches
+
+# Secrets / environment
+.env
+.env.local
+.env.*.local
+
+# EF Core migrations bundle
+efbundle
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
