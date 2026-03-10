@@ -1,0 +1,100 @@
+title Multi-Tenant AI Middleware SaaS Platform for WhatsApp Customer Service
+
+// Entry Point - Customer
+Customer [icon: smartphone, label: "Customer (End-User)"]
+
+// External APIs
+Meta WhatsApp API [icon: whatsapp]
+
+// SaaS Platform Core
+SaaS Platform [color: blue, icon: server, textSize: medium] {
+  AiAgent API [icon: dotnet, label: "AiAgent.Api (ASP.NET Core)"]
+
+  Tenant Security Layer [color: purple, icon: lock] {
+    Tenant Resolver [icon: search, label: "Tenant Lookup & Security"]
+    Secret Decryption [icon: key, label: "Decrypt Client Secrets"]
+    SaaS Master Key [icon: azure-key-vault, label: "Master Key Vault"]
+  }
+
+  AI Orchestrator [icon: cpu, label: "AI Orchestrator"]
+
+  LLM Router [icon: openai, label: "LLM Router (GPT-4o)"]
+
+  RAG Path [color: green, icon: book] {
+    Vector Store [icon: postgresql, label: "Vector Store (pgvector)"]
+  }
+
+  SQL Path [color: orange, icon: database] {
+    SQL Connector Factory [icon: tool, label: "Dynamic SQL Connector"]
+    Field Mapping [icon: map, label: "Field Mapping Metadata"]
+  }
+
+  Data Storage [icon: hard-drive] {
+    Tenant Metadata DB [icon: postgresql, label: "Tenant Metadata (PostgreSQL)"]
+  }
+
+  
+  Response Synthesizer [icon: message-circle, label: "Arabic Response Generator"]
+}
+
+// External Client Ecosystem
+Client Ecosystem [color: yellow, icon: users] {
+  Store Owner [icon: user, label: "Client (Store Owner)"]
+  Client Dashboard [icon: react, label: "React/Next.js Dashboard"]
+
+  Dashboard Features [icon: settings] {
+    PDF Uploads [icon: upload, label: "Knowledge Uploads"]
+    Field Config [icon: sliders, label: "Field Mapping Config"]
+    Analytics [icon: bar-chart-2, label: "Chat Analytics"]
+  }
+}
+
+External Store DB [icon: database, label: "Store Database (MySQL/SQL Server)"]
+
+// Customer Message Flow
+Customer > Meta WhatsApp API: "كم سعر المنتج؟"
+Meta WhatsApp API > AiAgent API: webhook
+
+// Tenant Resolution
+AiAgent API > Tenant Resolver
+Tenant Resolver <> Tenant Metadata DB: lookup by phone
+Tenant Resolver > Secret Decryption
+Secret Decryption <> SaaS Master Key
+
+// AI Processing
+AiAgent API > AI Orchestrator
+AI Orchestrator > LLM Router: analyze intent
+
+// Path A - RAG
+LLM Router > Vector Store: informational query [color: green]
+
+// Path B - SQL
+LLM Router > SQL Connector Factory: transactional query [color: orange]
+SQL Connector Factory <> Field Mapping
+SQL Connector Factory <--> External Store DB: secure query [color: orange]
+
+// Response Flow
+AI Orchestrator > Response Synthesizer
+Response Synthesizer > LLM Router: generate Arabic response
+
+// Monitoring
+
+// Client Dashboard Flow
+Store Owner > Client Dashboard
+Client Dashboard > AiAgent API
+PDF Uploads --> Vector Store: chunked embeddings
+Field Config --> Field Mapping
+
+legend {
+  [connection: ">", label: "Request/response flow"]
+  [connection: "<>", label: "Bidirectional data exchange"]
+  [connection: "-->", label: "Async/background process"]
+  [connection: ">", color: green, label: "RAG path (informational)"]
+  [connection: ">", color: orange, label: "SQL path (transactional)"]
+  [color: purple, label: "Security & tenant isolation"]
+}
+Client Dashboard <> Dashboard Features
+AI Orchestrator < Vector Store
+AI Orchestrator < SQL Connector Factory
+AiAgent API < LLM Router
+Customer < Meta WhatsApp API: Arabic response
